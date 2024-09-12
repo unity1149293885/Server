@@ -8,3 +8,13 @@ D:\DemoServer\Server\Server\obj\Debug\Server.pdb
 D:\DemoServer\Server\Server\bin\Debug\Newtonsoft.Json.dll
 D:\DemoServer\Server\Server\bin\Debug\Newtonsoft.Json.xml
 D:\DemoServer\Server\Server\obj\Debug\Server.csproj.CopyComplete
+D:\DemoServer\Server-Code\Server\Server\bin\Debug\Server.exe.config
+D:\DemoServer\Server-Code\Server\Server\bin\Debug\Server.exe
+D:\DemoServer\Server-Code\Server\Server\bin\Debug\Server.pdb
+D:\DemoServer\Server-Code\Server\Server\bin\Debug\Newtonsoft.Json.dll
+D:\DemoServer\Server-Code\Server\Server\bin\Debug\Newtonsoft.Json.xml
+D:\DemoServer\Server-Code\Server\Server\obj\Debug\Server.csprojAssemblyReference.cache
+D:\DemoServer\Server-Code\Server\Server\obj\Debug\Server.csproj.CoreCompileInputs.cache
+D:\DemoServer\Server-Code\Server\Server\obj\Debug\Server.csproj.CopyComplete
+D:\DemoServer\Server-Code\Server\Server\obj\Debug\Server.exe
+D:\DemoServer\Server-Code\Server\Server\obj\Debug\Server.pdb

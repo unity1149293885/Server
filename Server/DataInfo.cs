@@ -4,19 +4,12 @@ using System.Collections.Generic;
 namespace Server
 {
 
-    public class UserManager
+    public static class UserManager
     {
-        private List<UserInfo> UserList = new List<UserInfo>();
-
-        private static readonly UserManager instance = new UserManager();
-
-        public UserManager Instance {
-            get => instance;
-        }
+        private static List<UserInfo> UserList = new List<UserInfo>();
         
-
         //注册
-        public void Regiester(string account,string password)
+        public static void Regiester(string account,string password)
         {
             UserInfo user = new UserInfo(); 
             user.Account = account;
@@ -32,14 +25,14 @@ namespace Server
         }
 
         //登录
-        public void Login(string account, string password)
+        public static void Login(string account, string password)
         {
             var user = getHaveUser(account);
             user.state = Login_state.logined;
         }
 
         //通过账号获取user信息
-        public UserInfo getHaveUser(string account)
+        public static UserInfo getHaveUser(string account)
         {
             foreach(var it in UserList)
             {
@@ -52,14 +45,14 @@ namespace Server
         }
 
         //校验密码
-        public bool isLoginSuccess(string account,string password)
+        public static bool isLoginSuccess(string account,string password)
         {
             var user = getHaveUser(account);
             return user.Password == password;
         }
 
         //uid是否已占用（uid唯一）
-        public bool ishaveUid(string uid)
+        public static bool ishaveUid(string uid)
         {
             foreach(var it in UserList)
             {
@@ -74,11 +67,18 @@ namespace Server
             return false;
         }
 
-        public void changeUserInfo(string password,string name)
+        public static void changeUserInfo(string password,string name)
         {
             ///
         }
     }
+
+    public static class ConnectInfo
+    {
+        public static string ipAddress = "10.12.20.93";
+        public static int Port = 7788;
+    }
+
     public class Animal
     {
         public int id;

@@ -21,11 +21,9 @@ namespace Server
         static void Main(string[] args)
         {
             Socket TcpServer = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);//这句话是申请一个新的套接字，作用在InterNet网络，也就是因特网，类型是流式套接字，还有数据报类型等等，使用的协议是TCP协议
-            TcpServer.Bind(new IPEndPoint(IPAddress.Parse("10.12.20.93"), 7788));//这一句话用于将套接字绑定在“当前主机IP的第7788号端口之上”这里的ip需要自己查阅
+            TcpServer.Bind(new IPEndPoint(IPAddress.Parse(ConnectInfo.ipAddress), ConnectInfo.Port));//这一句话用于将套接字绑定在“当前主机IP的第7788号端口之上”这里的ip需要自己查阅
             TcpServer.Listen(100);
-            Console.WriteLine("服务器已开启 Ip:10.12.20.93 端口号：7788");
-
-            UserManager userManager = new UserManager();
+            Console.WriteLine("服务器已开启 Ip:"+ ConnectInfo.ipAddress+" 端口号："+ ConnectInfo.Port);
 
             while (true)//服务端一旦开启就会一直运行下去
             {
