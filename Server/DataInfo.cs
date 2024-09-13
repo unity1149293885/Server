@@ -3,80 +3,18 @@ using System.Collections.Generic;
 
 namespace Server
 {
-
-    public static class UserManager
-    {
-        private static List<UserInfo> UserList = new List<UserInfo>();
-        
-        //注册
-        public static void Regiester(string account,string password)
-        {
-            UserInfo user = new UserInfo(); 
-            user.Account = account;
-            user.Password = password;
-
-            user.uid = (new Random().Next(10000000, 99999999)).ToString();
-            while (ishaveUid(user.uid))
-            {
-                user.uid = (new Random().Next(10000000, 99999999)).ToString();
-            }
-
-            UserList.Add(user);
-        }
-
-        //登录
-        public static void Login(string account, string password)
-        {
-            var user = getHaveUser(account);
-            user.state = Login_state.logined;
-        }
-
-        //通过账号获取user信息
-        public static UserInfo getHaveUser(string account)
-        {
-            foreach(var it in UserList)
-            {
-                if(account == it.Account)
-                {
-                    return it;
-                }
-            }
-            return null;
-        }
-
-        //校验密码
-        public static bool isLoginSuccess(string account,string password)
-        {
-            var user = getHaveUser(account);
-            return user.Password == password;
-        }
-
-        //uid是否已占用（uid唯一）
-        public static bool ishaveUid(string uid)
-        {
-            foreach(var it in UserList)
-            {
-                if (it.uid != null)
-                {
-                    if (it.uid == uid)
-                    {
-                        return true;
-                    }
-                } 
-            }
-            return false;
-        }
-
-        public static void changeUserInfo(string password,string name)
-        {
-            ///
-        }
-    }
-
     public static class ConnectInfo
     {
         public static string ipAddress = "10.12.20.93";
         public static int Port = 7788;
+    }
+
+    public static class MySqlInfo
+    {
+        public static string server = "localhost";
+        public static string user = "root";
+        public static string database = "UserDataBase";
+        public static string password = "zzs20001114";
     }
 
     public class Animal
@@ -93,30 +31,58 @@ namespace Server
         public Dictionary<string, string> friends;
     }
 
+
+    public enum UserType
+    {
+        Mamager,
+        Teamer,
+        Broker,
+    }
+    public class UserInfo
+    {
+        public int Uid;
+        public string Name;
+        public string Phone;
+        public Login_state State;
+        public UserType Type;
+
+        public UserInfo(int uid,string name,string phone,int type)
+        {
+            this.Uid = uid;
+            this.Name = name;
+            this.Phone = phone;
+            this.Type = (UserType)type;
+        }
+    }
+    #region 登录数据
     public enum Login_state
     {
         logined = 1,
         unlogin = 2
     }
-    public class UserInfo
-    {
-        public string Account;
-        public string Password;
-        public string uid;
-        public string name;
-        public Login_state state;
-    }
     public class LoginReq
     {
-        public string Account;
-        public string Password;
+        public string Name;
+        public string Phone;
         public DateTime Time;
     }
 
     public class LoginRst
     {
-        public bool isSuccessLogin;
-        public string uid;
+        public LoginCode StateCode;
+        public int uid;
     }
+
+    public enum LoginCode
+    {
+        //10001 登录成功
+        //20001 密码错误
+        //20002 未注册
+        Login_Success = 10001,
+        Login_Fail_PasswordError = 20001,
+        Login_Fail_UnLogin = 20002,
+    }
+    #endregion
+
 
 }

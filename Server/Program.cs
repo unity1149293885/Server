@@ -10,6 +10,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace Server
 {
@@ -24,6 +25,10 @@ namespace Server
             TcpServer.Bind(new IPEndPoint(IPAddress.Parse(ConnectInfo.ipAddress), ConnectInfo.Port));//这一句话用于将套接字绑定在“当前主机IP的第7788号端口之上”这里的ip需要自己查阅
             TcpServer.Listen(100);
             Console.WriteLine("服务器已开启 Ip:"+ ConnectInfo.ipAddress+" 端口号："+ ConnectInfo.Port);
+
+            MySqlTools.ConnectMySql();
+
+            MySqlTools.GetAllUserInfo();
 
             while (true)//服务端一旦开启就会一直运行下去
             {

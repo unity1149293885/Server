@@ -34,16 +34,28 @@ namespace Server
             LoginReq req = JsonConvert.DeserializeObject<LoginReq>(jsonStr);
 
             //检测是否可以登录
-            string account = req.Account;
-            string password = req.Password;
+            string name = req.Name;
+            string phone = req.Phone;
             DateTime LoginTime = req.Time;
+            
+            var rst = UserManager.isLoginSuccess(name, phone);
 
-            LoginRst rst = new LoginRst();
-            rst.isSuccessLogin = true;
-            var uid = new Random().Next(10000000, 99999999);
-            rst.uid = uid.ToString();
+            var code = rst.StateCode;
+            string loginstate = "";
+            switch(code)
+            {
+                case LoginCode.Login_Success:
+                    loginstate = "登录成功";
+                    break;
+                case LoginCode.Login_Fail_UnLogin:
+                    loginstate = "账号未注册";
+                    break;
+                case LoginCode.Login_Fail_PasswordError:
+                    loginstate = "名字电话号不对应";
+                    break;
+            }
 
-            Console.WriteLine("用户uid:" + uid + "登录成功！登录时间：" + LoginTime.Month + "月" + LoginTime.Day + "日" + LoginTime.Hour + "时" + LoginTime.Minute + "分" + LoginTime.Second + "秒");
+            Console.WriteLine("用户uid:" + rst.uid + "登录状态："+loginstate+" 登录时间：" + LoginTime.Month + "月" + LoginTime.Day + "日" + LoginTime.Hour + "时" + LoginTime.Minute + "分" + LoginTime.Second + "秒");
 
             return rst;
 

@@ -44,12 +44,7 @@ namespace Server
                         Console.WriteLine("客户端关闭连接");
                         break;
                     }
-
-                    //接收玩家id
-                    byte[] uidNumber_byte = new byte[8];
-                    ClientSocket.Receive(uidNumber_byte, 0, uidNumber_byte.Length, SocketFlags.None);
-                    long uid = BitConverter.ToInt64(uidNumber_byte, 0);
-
+                    
                     //接收协议编号
                     byte[] ProtocolNumber_byte = new byte[8];
                     ClientSocket.Receive(ProtocolNumber_byte, 0, ProtocolNumber_byte.Length, SocketFlags.None);
@@ -72,7 +67,7 @@ namespace Server
 
                     string content = Encoding.UTF8.GetString(ClientData, 0, (int)ClientDataSize);
 
-                    Console.WriteLine("玩家唯一id：" + uid + " 协议号：" + ProtocolNumber + "  包体内容：" + content);
+                    Console.WriteLine("协议号：" + ProtocolNumber + "  包体内容：" + content);
 
                     long ServertoClientProtocolNumber = ProtocolNumber + 1;
                     string ProtocolName = "Protocol_" + ServertoClientProtocolNumber;
