@@ -31,13 +31,13 @@ namespace Server
         public Dictionary<string, string> friends;
     }
 
-
     public enum UserType
     {
         Mamager,
         Teamer,
         Broker,
     }
+
     public class UserInfo
     {
         public int Uid;
@@ -54,35 +54,4 @@ namespace Server
             this.Type = (UserType)type;
         }
     }
-    #region 登录数据
-    public enum Login_state
-    {
-        logined = 1,
-        unlogin = 2
-    }
-    public class LoginReq
-    {
-        public string Name;
-        public string Phone;
-        public DateTime Time;
-    }
-
-    public class LoginRst
-    {
-        public LoginCode StateCode;
-        public int uid;
-    }
-
-    public enum LoginCode
-    {
-        //10001 登录成功
-        //20001 密码错误
-        //20002 未注册
-        Login_Success = 10001,
-        Login_Fail_PasswordError = 20001,
-        Login_Fail_UnLogin = 20002,
-    }
-    #endregion
-
-
 }

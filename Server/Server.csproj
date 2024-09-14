@@ -122,6 +122,8 @@
   <ItemGroup>
     <Compile Include="DataInfo.cs" />
     <Compile Include="MySqlTools.cs" />
+    <Compile Include="Ouput.cs" />
+    <Compile Include="ProcolData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Protocol.cs" />

@@ -25,7 +25,7 @@ namespace Server
             ClientSocket = socket;
 
             Accept = new Thread(ReceiveMessage);//每一个客户端生成，都新开个线程
-            Console.WriteLine("连接一个客户端 客户端uid：");
+            Output.OutputInfo("连接一个客户端");
             Accept.Start();
         }
 
@@ -41,7 +41,7 @@ namespace Server
                     if (ClientSocket.Poll(10, SelectMode.SelectRead) || !ClientSocket.Connected)
                     {
                         ClientSocket.Close();
-                        Console.WriteLine("客户端关闭连接");
+                        Output.OutputInfo("客户端关闭连接");
                         break;
                     }
                     

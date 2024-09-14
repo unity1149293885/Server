@@ -57,7 +57,7 @@ namespace Server
             return null;
         }
 
-        //校验密码
+        //是否登录成功
         public static LoginRst isLoginSuccess(string name, string phone)
         {
             LoginRst rst = new LoginRst();

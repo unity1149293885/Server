@@ -28,7 +28,7 @@ namespace Server
 
             MySqlTools.ConnectMySql();
 
-            MySqlTools.GetAllUserInfo();
+            MySqlTools.UpdateAllUserInfo();
 
             while (true)//服务端一旦开启就会一直运行下去
             {

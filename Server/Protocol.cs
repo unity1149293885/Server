@@ -22,6 +22,7 @@ namespace Server
             return ServerData;
         }
 
+        //登录
         public static byte[] Protocol_100001(byte[] ClientData)
         {
             return null;
@@ -56,6 +57,63 @@ namespace Server
             }
 
             Console.WriteLine("用户uid:" + rst.uid + "登录状态："+loginstate+" 登录时间：" + LoginTime.Month + "月" + LoginTime.Day + "日" + LoginTime.Hour + "时" + LoginTime.Minute + "分" + LoginTime.Second + "秒");
+
+            return rst;
+
+        }
+
+        //注册
+        public static byte[] Protocol_100003(byte[] ClientData)
+        {
+            return null;
+        }
+        public static RegiesterUserRst Protocol_100004(byte[] ClientData)
+        {
+            byte[] ServerData = ClientData;
+            string jsonStr = Encoding.UTF8.GetString(ClientData);
+
+            RegiesterUserReq req = JsonConvert.DeserializeObject<RegiesterUserReq>(jsonStr);
+
+            //检测是否可以注册
+            string name = req.name;
+            string phone = req.phone;
+            UserType type = req.type;
+
+            LoginCode code;
+            RegiesterUserRst rst = null;
+            var user = UserManager.getHaveUser(name);
+            if (user != null)
+            {
+                code = LoginCode.Register_Fail_isHave;
+                rst = new RegiesterUserRst(code, -1);
+            }
+            else
+            {
+                //随机uid
+                 int uid = (new Random().Next(1000001, 1999999));
+                //写入数据库
+                MySqlTools.RegisterUser(uid, name, phone, (int)type);
+
+                code = LoginCode.Register_Success;
+                rst = new RegiesterUserRst(code, uid);
+
+                //数据库写完之后需要更新当前维护的玩家列表
+                MySqlTools.UpdateAllUserInfo();
+            }
+            
+            string registerstate = "";
+            switch (code)
+            {
+                case LoginCode.Register_Success:
+                    registerstate = "注册成功";
+                    break;
+                case LoginCode.Register_Fail_isHave:
+                    registerstate = "账号之前已注册";
+                    break;
+            }
+
+            string message = "用户uid:" + rst.uid + "注册状态：" + registerstate;
+            Output.OutputInfo(message);
 
             return rst;
 

@@ -21,7 +21,7 @@ namespace Server
             connection = new MySqlConnection(connectionString);
             connection.Open();
         }
-        public static void GetAllUserInfo()
+        public static void UpdateAllUserInfo()
         {
             MySqlCommand command = new MySqlCommand("SELECT * FROM UserInfo", connection);
             MySqlDataReader reader = command.ExecuteReader();
@@ -37,6 +37,23 @@ namespace Server
             }
 
             reader.Close();
+        }
+
+        public static void RegisterUser(int uid,string name,string phone,int type)
+        {
+            string sql = "INSERT INTO UserInfo (uid,name, phone, usertype) VALUES (@uid,@name, @phone, @usertype)";
+
+            // 创建 MySQL 命令对象
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            // 设置参数值
+            command.Parameters.AddWithValue("@uid", uid);
+            command.Parameters.AddWithValue("@name", name);
+            command.Parameters.AddWithValue("@phone", phone);
+            command.Parameters.AddWithValue("@usertype", type);
+
+            // 执行命令并返回受影响行数
+            int rowsAffected = command.ExecuteNonQuery();
         }
 
     }
