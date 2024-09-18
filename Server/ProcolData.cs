@@ -34,6 +34,7 @@ namespace Server
     public class LoginRst
     {
         public LoginCode StateCode;
+        public UserType userType;
         public int uid;
     }
 

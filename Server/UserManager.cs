@@ -80,7 +80,7 @@ namespace Server
 
             rst.StateCode = code;
             rst.uid = user.Uid;
-
+            rst.userType = user.Type;
             return rst;
         }
 
