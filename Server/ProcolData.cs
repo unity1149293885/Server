@@ -13,8 +13,8 @@ namespace Server
         Code_Login_req = 100001,//登录请求
         Code_Login_rst = 100002,//登录返回
 
-        Code_Register_req = 100003,//注册请求
-        Code__Register_rs = 100004,//注册返回
+        Code_Register_req = 200001,//注册请求
+        Code__Register_rs = 200002,//注册返回
     }
 
     #region 登录数据

@@ -33,9 +33,9 @@ namespace Server
 
     public enum UserType
     {
-        Mamager,
-        Teamer,
-        Broker,
+        Mamager = 1,
+        Teamer = 2,
+        Broker = 3,
     }
 
     public class UserInfo

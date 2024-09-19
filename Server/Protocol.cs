@@ -63,11 +63,11 @@ namespace Server
         }
 
         //注册
-        public static byte[] Protocol_100003(byte[] ClientData)
+        public static byte[] Protocol_200001(byte[] ClientData)
         {
             return null;
         }
-        public static RegiesterUserRst Protocol_100004(byte[] ClientData)
+        public static RegiesterUserRst Protocol_200002(byte[] ClientData)
         {
             byte[] ServerData = ClientData;
             string jsonStr = Encoding.UTF8.GetString(ClientData);
@@ -118,11 +118,11 @@ namespace Server
             return rst;
 
         }
-        public static byte[] Protocol_200001(byte[] ClientData)
+        public static byte[] Protocol_200003(byte[] ClientData)
         {
             return null;
         }
-        public static Animal Protocol_200002(byte[] ClientData)
+        public static Animal Protocol_200004(byte[] ClientData)
         {
             byte[] ServerData = ClientData;
 
@@ -139,26 +139,6 @@ namespace Server
             animal.price = count;
 
             return animal;
-        }
-        public static byte[] Protocol_200003(byte[] ClientData)
-        {
-            return null;
-        }
-        public static People Protocol_200004(byte[] ClientData)
-        {
-            byte[] ServerData = ClientData;
-
-            string jsonStr = Encoding.UTF8.GetString(ClientData);
-            People peo = JsonConvert.DeserializeObject<People>(jsonStr);
-
-            peo.friends = new Dictionary<string, string>();
-
-            peo.friends.Add("1", "张三");
-            peo.friends.Add("2", "李四");
-            peo.friends.Add("3", "王五");
-
-
-            return peo;
         }
     }
 }
