@@ -3,10 +3,20 @@ using System.Collections.Generic;
 
 namespace Server
 {
+    public enum IpType
+    {
+        Home = 1,
+        Cyou = 2
+    }
     public static class ConnectInfo
     {
-        public static string ipAddress = "10.12.20.93";
+        public static string ipAddressCyou = "10.12.20.93";
+
+        public static string ipAddressHome = "192.168.137.1";
+
         public static int Port = 7788;
+
+        public static IpType type = IpType.Home;
     }
 
     public static class MySqlInfo

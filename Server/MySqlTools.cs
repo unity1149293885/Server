@@ -20,6 +20,8 @@ namespace Server
 
             connection = new MySqlConnection(connectionString);
             connection.Open();
+
+            Output.OutputInfo("数据库已连接！");
         }
         public static void UpdateAllUserInfo()
         {
