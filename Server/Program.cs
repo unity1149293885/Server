@@ -35,9 +35,14 @@ namespace Server
             TcpServer.Listen(100);
             Console.WriteLine("服务器已开启 Ip:"+ ipAddress+" 端口号："+ ConnectInfo.Port);
 
+            //连接数据库
             MySqlTools.ConnectMySql();
-
+            
+            //更新玩家信息
             MySqlTools.UpdateAllUserInfo();
+
+            //更新产品信息
+            MySqlTools.GetAllDownItem(false);
 
             while (true)//服务端一旦开启就会一直运行下去
             {

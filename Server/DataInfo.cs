@@ -16,7 +16,7 @@ namespace Server
 
         public static int Port = 7788;
 
-        public static IpType type = IpType.Home;
+        public static IpType type = IpType.Cyou;
     }
 
     public static class MySqlInfo

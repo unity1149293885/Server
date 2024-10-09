@@ -58,5 +58,51 @@ namespace Server
             int rowsAffected = command.ExecuteNonQuery();
         }
 
+        public static bool ChangeItemState(int id,bool isDown)
+        {
+            if (ItemManager.ChangeItemState(id, isDown) == false) return false;
+            string sql = "";
+            //维护一个下架数组        
+            if (isDown == false){
+                //上架
+                sql = "delete from iteminfo where id = (@id)";
+            }
+            else
+            {
+                //下架
+                sql = "INSERT INTO iteminfo (id) VALUES (@id)";
+            }
+            // 创建 MySQL 命令对象
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            // 设置参数值
+            command.Parameters.AddWithValue("@id", id);
+
+            // 执行命令并返回受影响行数
+            int rowsAffected = command.ExecuteNonQuery();
+
+            GetAllDownItem();
+
+            return true; 
+        }
+
+        public static void GetAllDownItem(bool isDisplay = true)
+        {
+            MySqlCommand command = new MySqlCommand("SELECT * FROM iteminfo", connection);
+            MySqlDataReader reader = command.ExecuteReader();
+            Console.WriteLine("当前下架列表：");
+            while (reader.Read())
+            {
+                int id = reader.GetInt32(0);
+                if (isDisplay == false)
+                {
+                    ItemManager.ChangeItemState(id, false);
+                }
+                Console.WriteLine("{0}", reader.GetInt32(0));
+            }
+
+            reader.Close();
+        }
+
     }
 }

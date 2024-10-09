@@ -118,27 +118,25 @@ namespace Server
             return rst;
 
         }
-        public static byte[] Protocol_200003(byte[] ClientData)
+        public static byte[] Protocol_300001(byte[] ClientData)
         {
             return null;
         }
-        public static Animal Protocol_200004(byte[] ClientData)
+        public static ItemChangeStateRst Protocol_300002(byte[] ClientData)
         {
             byte[] ServerData = ClientData;
 
             string jsonStr = Encoding.UTF8.GetString(ClientData);
-            Animal animal = JsonConvert.DeserializeObject<Animal>(jsonStr);
+            ItemChangeStateReq req = JsonConvert.DeserializeObject<ItemChangeStateReq>(jsonStr);
 
-            int count = 0;
-            foreach (var t in animal.SkillIdList)
-            {
-                count += t;
-            }
+            int id = req.id;
+            bool isDown = req.isDown;
 
-            //操作对象
-            animal.price = count;
-
-            return animal;
+            ItemChangeStateRst rst = new ItemChangeStateRst();
+            rst.id = id;
+            rst.isDown = isDown;
+            rst.isSuccess = MySqlTools.ChangeItemState(id, isDown);
+            return rst;
         }
     }
 }

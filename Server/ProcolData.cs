@@ -15,6 +15,9 @@ namespace Server
 
         Code_Register_req = 200001,//注册请求
         Code__Register_rs = 200002,//注册返回
+
+        Code_Item_ChangeState_req = 300001,//商品上/下架请求
+        Code_Item_ChangeState_rst = 300002,//商品上/下架返回
     }
 
     #region 登录数据
@@ -36,6 +39,7 @@ namespace Server
         public LoginCode StateCode;
         public UserType userType;
         public int uid;
+        public List<int> DownList;
     }
 
     public enum LoginCode
@@ -81,4 +85,19 @@ namespace Server
     }
     #endregion
 
+    #region 商品上下架
+    public class ItemChangeStateReq
+    {
+        public int id;
+        public bool isDown;
+    }
+
+    public class ItemChangeStateRst
+    {
+        public int id;
+        public bool isDown;
+        public bool isSuccess;
+
+    }
+    #endregion
 }
