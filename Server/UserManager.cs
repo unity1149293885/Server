@@ -81,6 +81,7 @@ namespace Server
             rst.StateCode = code;
             rst.uid = user.Uid;
             rst.userType = user.Type;
+            rst.DownList = ItemManager.DownItemList;
             return rst;
         }
 
